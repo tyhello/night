@@ -64,15 +64,17 @@
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script src="js/layer/layer.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    var NebPay = require("nebpay"); 
+    var NebPay = require("nebpay");
     var nebPay = new NebPay();
 
     //检查扩展是否已安装
     //如果安装了扩展，var“webExtensionWallet”将被注入到web页面中
-    if (typeof(webExtensionWallet) === "undefined") {
-        //alert ("扩展钱包未安装，请先安装.")
-        $("#noExtension").show();
-    }
+    setTimeout(function () {
+        if (typeof(webExtensionWallet) === "undefined") {
+            //alert ("扩展钱包未安装，请先安装.")
+            $("#noExtension").show();
+        }
+    }, 500)
 
     var dappAddress = "n231XRiJV3FXKBL7zU2SF9EuXvv6MD7QNLu";
     var initKey = '';
@@ -83,7 +85,7 @@
 
     // 初始化
     function getWish(page) {
-        initKey = 'wish:' + new Date().getTime() + RndNum(3);
+        initKey = 'night:' + new Date().getTime() + RndNum(3);
         var to = dappAddress;
         var value = "0";
         var callFunction = "forEach";
@@ -105,10 +107,10 @@
 
     // 提交
     function push() {
-        if($('#cityName').val()==''){
+        if ($('#cityName').val() == '') {
             layer.alert('来自地方不能为空！');
             return;
-        }else if ($("#word").val() == '') {
+        } else if ($("#word").val() == '') {
             layer.alert('内容不能为空！');
             return;
         } else if ($("#word").val() > 500) {
